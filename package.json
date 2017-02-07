@@ -1,0 +1,79 @@
+{
+    "name": "xedos-animator",
+    "version": "0.0.0",
+    "description": "plugin project for animate elements",
+    "homepage": "",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/xedoken/xedos-animator.git"
+    },
+    "author": {
+        "name": "xedoken",
+        "email": "xedoken@gmail.com",
+        "url": ""
+    },
+    "scripts": {
+        "preversion": "npm test && npm run build",
+        "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+        "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+        "testee": "testee test/test.html --browsers chrome",
+        "test": "npm run jshint && npm run testee",
+        "jshint": "jshint ./*.js ./src/ --config",
+        "release:patch": "npm version patch && npm publish",
+        "release:minor": "npm version minor && npm publish",
+        "release:major": "npm version major && npm publish",
+        "build": "node build.js",
+        "document": "documentjs",
+        "develop": "done-serve --static --develop --port 8080"
+    },
+    "main": "dist/cjs/xedos-animator",
+    "browser": {
+        "transform": [
+            "cssify"
+        ]
+    },
+    "browserify": {
+        "transform": [
+            "cssify"
+        ]
+    },
+    "keywords": [
+        "donejs"
+    ],
+    "system": {
+        "main": "xedos-animator",
+        "configDependencies": [
+            "live-reload"
+        ],
+        "npmIgnore": [
+            "documentjs",
+            "testee",
+            "generator-donejs",
+            "donejs-cli",
+            "steal-tools"
+        ],
+        "directories": {
+            "lib": "src"
+        },
+        "npmAlgorithm": "flat"
+    },
+    "dependencies": {
+        "can-component": "^3.0.5",
+        "can-compute": "^3.0.5",
+        "can-define": "^1.0.16",
+        "can-stache": "^3.0.19",
+        "can-stache-bindings": "^3.0.6"
+    },
+    "devDependencies": {
+        "documentjs": "^0.4.2",
+        "jshint": "^2.9.1",
+        "cssify": "^0.6.0",
+        "steal": "^0.16.0",
+        "steal-qunit": "^0.1.1",
+        "steal-tools": "^0.16.0",
+        "testee": "^0.2.4",
+        "generator-donejs": "^0.10.0-pre.0",
+        "donejs-cli": "^0.10.0-pre.0",
+        "done-serve": "^0.3.0-pre.0"
+    }
+}
